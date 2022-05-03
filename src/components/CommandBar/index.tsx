@@ -41,28 +41,28 @@ const _items: ICommandBarItemProps[] = [
         },
     },
     {
-        key: 'upload',
-        text: 'Upload',
-        iconProps: { iconName: 'Upload' },
-        href: 'https://developer.microsoft.com/en-us/fluentui',
+        key: 'contact',
+        text: 'Contact',
+        iconProps: { iconName: 'Contact' },
+        href: 'https://www.google.com',
     },
     {
-        key: 'share',
-        text: 'Share',
-        iconProps: { iconName: 'Share' },
-        onClick: () => console.log('Share'),
+        key: 'info',
+        text: 'Info',
+        iconProps: { iconName: 'Info' },
+        onClick: () => console.log('Info'),
     },
     {
-        key: 'download',
-        text: 'Download',
-        iconProps: { iconName: 'Download' },
-        onClick: () => console.log('Download'),
+        key: 'Aboutus',
+        text: 'About us',
+        iconProps: { iconName: 'People' },
+        onClick: () => console.log('People'),
     },
 ];
 
 const _overflowItems: ICommandBarItemProps[] = [
-    { key: 'move', text: 'Move to...', onClick: () => console.log('Move to'), iconProps: { iconName: 'MoveToFolder' } },
-    { key: 'copy', text: 'Copy to...', onClick: () => console.log('Copy to'), iconProps: { iconName: 'Copy' } },
+    { key: 'aboutlorawan', text: 'About Lorawan', onClick: () => console.log('InternetSharing'), iconProps: { iconName: 'InternetSharing' } },
+    { key: 'howto', text: 'Howto setup a new sensor', onClick: () => console.log('how to'), iconProps: { iconName: 'TextDocument' } },
     { key: 'rename', text: 'Rename...', onClick: () => console.log('Rename'), iconProps: { iconName: 'Edit' } },
 ];
 
