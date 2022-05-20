@@ -18,8 +18,9 @@ function App() {
     const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(false);
 
     useEffect(() => {
-        window.addEventListener('resize', () => setHeight(window.innerHeight));
-        return () => window.removeEventListener('resize', () => setHeight(window.innerHeight));
+        const cb = () => setHeight(window.innerHeight)
+        window.addEventListener('resize', cb);
+        return () => window.removeEventListener('resize', cb);
     })
 
     return (
