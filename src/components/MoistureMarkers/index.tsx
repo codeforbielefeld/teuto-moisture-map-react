@@ -5,6 +5,13 @@ import { FontWeights, getTheme, mergeStyleSets, Overlay, Text } from '@fluentui/
 import './index.css'
 import useFetch from 'use-http';
 import { Measurement, MeasurementData } from '../../model/models';
+import { renderToString } from 'react-dom/server'
+
+import tree_green from '../../resources/images/tree_green_50.png'
+import tree_yellow from '../../resources/images/tree_yellow_50.png'
+import tree_brown from '../../resources/images/tree_brown_50.png'
+import tree_dead from '../../resources/images/tree_dead_50.png'
+
 
 const MOISTURE_DATA_URL = process.env.REACT_APP_MOISTURE_DATA_URL 
 
@@ -66,38 +73,32 @@ const styles = mergeStyleSets({
         fontWeight: FontWeights.semibold,
         fontSize: 20
 
+    },
+    tree_icon: {
+        top: -59,
+        left: -26,
+        position: "relative"
     }
 });
 
 
-const markerHtmlStyles = (customColor: String) => `
-  background-color: ${customColor};
-  width: 1.5rem;
-  height: 1.5rem;
-  display: block;
-  left: -0.5rem;
-  top: -0.5rem;
-  position: relative;
-  border-radius: 1.5rem 1.5rem 0;
-  transform: rotate(45deg);
-  border: 1px solid #FFFFFF`
 
 const icon = (record: Measurement) => L.divIcon({
     className: "custom-pin",
     iconAnchor: [4, 24],
     popupAnchor: [4, -36],
-    html: `<span style="${markerHtmlStyles(getColorForRecordMarker(record))}" />`
+    html: renderToString(<img src={getImageForMeasurment(record)} className={styles.tree_icon}></img>)    
 })
 
-const getColorForRecordMarker = (record: Measurement) => {
-    return record.percent < 10 ? 'red' : record.percent < 30 ? 'yellow' : 'green';
+const getImageForMeasurment = (record: Measurement) => {
+    return record.percent < 10 ? tree_dead        : 
+    record.percent < 20 ? tree_brown : 
+    record.percent < 25 ? tree_yellow :
+    tree_green;
 };
 
 const MoistureMarkers: React.FC = () => {
-    console.log("WORLD")
-    console.log(MOISTURE_DATA_URL)
-    const { loading, error, data } = useFetch<MeasurementData>(MOISTURE_DATA_URL, {}, []);
-    console.log("l", loading, "e", error, "d", data)
+    const { loading, error, data } = useFetch<MeasurementData>(MOISTURE_DATA_URL, {}, []);    
     if (loading)
         return (
             <Overlay isDarkThemed={true} className={styles.overlay}>
