@@ -40,7 +40,7 @@ jobs:
     steps:
     - uses: actions/download-artifact@v2
       with:
-        name: teuto-moisture-map-react
+        name: build_artifact
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
@@ -49,4 +49,4 @@ jobs:
         password: ${{ secrets.TEUTO_MAP_FTP_PASSWORD }}
         protocol: ftps
         port: 21 
-        local-dir: build/
+        local-dir: build_artifact/
