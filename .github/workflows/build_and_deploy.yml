@@ -31,7 +31,7 @@ jobs:
         npm run build:ci
     - uses: actions/upload-artifact@v2
       with:
-        name: teuto-moisture-map-react
+        name: build_artifact
         path: build
   deploy:
     runs-on: ubuntu-latest
