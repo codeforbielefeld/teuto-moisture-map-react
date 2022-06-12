@@ -41,6 +41,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: build_artifact
+        path: build_artifact
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
