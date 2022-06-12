@@ -31,7 +31,7 @@ jobs:
         npm run build:ci
     - uses: actions/upload-artifact@v2
       with:
-        name: build_artifact
+        name: teuto_map_artifact
         path: build
   deploy:
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
     steps:
     - uses: actions/download-artifact@v2
       with:
-        name: build_artifact
+        name: teuto_map_artifact
         path: build_artifact
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
@@ -49,5 +49,6 @@ jobs:
         username: tillyv_0
         password: ${{ secrets.TEUTO_MAP_FTP_PASSWORD }}
         protocol: ftps
+        dangerous-clean-slate: true
         port: 21 
         local-dir: build_artifact/
