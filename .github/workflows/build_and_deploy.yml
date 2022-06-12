@@ -29,11 +29,18 @@ jobs:
       run: |
         npm install
         npm run build:ci
+    - uses: actions/upload-artifact@v2
+      with:
+        name: teuto-moisture-map-react
+        path: build
   deploy:
     runs-on: ubuntu-latest
     needs: build
     if: github.ref == 'refs/heads/main'
     steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: teuto-moisture-map-react
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
