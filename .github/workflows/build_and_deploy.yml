@@ -49,6 +49,5 @@ jobs:
         username: tillyv_0
         password: ${{ secrets.TEUTO_MAP_FTP_PASSWORD }}
         protocol: ftps
-        dangerous-clean-slate: true
-        port: 21 
+        port: 21
         local-dir: build_artifact/
