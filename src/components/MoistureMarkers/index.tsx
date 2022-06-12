@@ -87,7 +87,7 @@ const icon = (record: Measurement) => L.divIcon({
     className: "custom-pin",
     iconAnchor: [4, 24],
     popupAnchor: [4, -36],
-    html: renderToString(<img src={getImageForMeasurment(record)} className={styles.tree_icon}></img>)    
+    html: renderToString(<img src={getImageForMeasurment(record)} className={styles.tree_icon} alt={"tag"}></img>)
 })
 
 const getImageForMeasurment = (record: Measurement) => {
