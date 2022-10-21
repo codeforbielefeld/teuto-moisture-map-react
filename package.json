@@ -1,60 +1,68 @@
 {
-  "name": "teuto-moisture-map-react",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@fluentui/font-icons-mdl2": "^8.5.2",
-    "@fluentui/react": "^8.98.5",
-    "@fluentui/react-hooks": "^8.6.12",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^12.1.5",
-    "@testing-library/user-event": "^14.4.3",
-    "@types/jest": "^29.2.0",
-    "@types/node": "^18.11.3",
-    "@types/react": "^17.0.17",
-    "@types/react-dom": "^17.0.17",
-    "leaflet": "^1.9.2",
-    "raw.macro": "^0.6.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-leaflet": "^3.2.5",
-    "react-markdown": "^8.0.3",
-    "react-scripts": "5.0.1",
-    "remark-gfm": "^3.0.1",
-    "serve": "^14.0.1",
-    "typescript": "^4.8.4",
-    "use-http": "^1.0.27",
-    "web-vitals": "^3.0.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "prod": "react-scripts build && serve -s build",
-    "prettier": "prettier --write .",
-    "build:ci": "CI=false && REACT_APP_ENV=production && react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@types/leaflet": "^1.9.0",
-    "prettier": "^2.7.1"
-  }
+    "name": "teuto-moisture-map-react",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@fluentui/font-icons-mdl2": "^8.5.2",
+        "@fluentui/react": "^8.98.5",
+        "@fluentui/react-hooks": "^8.6.12",
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^12.1.5",
+        "@testing-library/user-event": "^14.4.3",
+        "@types/jest": "^29.2.0",
+        "@types/node": "^18.11.3",
+        "@types/react": "^17.0.17",
+        "@types/react-dom": "^17.0.17",
+        "leaflet": "^1.9.2",
+        "raw.macro": "^0.6.2",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-leaflet": "^3.2.5",
+        "react-markdown": "^8.0.3",
+        "react-scripts": "5.0.1",
+        "remark-gfm": "^3.0.1",
+        "serve": "^14.0.1",
+        "typescript": "^4.8.4",
+        "use-http": "^1.0.27",
+        "web-vitals": "^3.0.4"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "prod": "react-scripts build && serve -s build",
+        "prettier": "prettier --write .",
+        "build:ci": "CI=false && REACT_APP_ENV=production && react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "prepare": "husky install"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest",
+            "prettier"
+        ]
+    },
+    "lint-staged": {
+        "**/*": "prettier --write --ignore-unknown"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@types/leaflet": "^1.9.0",
+        "eslint-config-prettier": "^8.5.0",
+        "husky": "^8.0.1",
+        "lint-staged": "^13.0.3",
+        "prettier": "^2.7.1"
+    }
 }

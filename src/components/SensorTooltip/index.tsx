@@ -1,11 +1,11 @@
 import { FontWeights, getTheme, mergeStyleSets, Text } from "@fluentui/react";
-import { SensorInfo } from '../../model/models';
+import { SensorInfo } from "../../model/models";
 
 // Styles
 const theme = getTheme();
 const styles = mergeStyleSets({
     header: {
-        padding: '12px 18px 12px',
+        padding: "12px 18px 12px",
     },
     title: [
         theme.fonts.xLarge,
@@ -15,8 +15,8 @@ const styles = mergeStyleSets({
         },
     ],
     inner: {
-        height: '100%',
-        padding: '0 18px 15px',
+        height: "100%",
+        padding: "0 18px 15px",
     },
     subtext: [
         theme.fonts.small,
@@ -30,23 +30,24 @@ const styles = mergeStyleSets({
         {
             color: theme.palette.neutralPrimary,
         },
-    ]
+    ],
 });
 
+const SensorTooltip = ({ record }: { record: SensorInfo }) => {
+    return (
+        <>
+            <div className={styles.header}>
+                <Text className={styles.title}>
+                    Feuchte: {record.percent} %
+                </Text>
+            </div>
+            <div className={styles.inner}>
+                <Text className={styles.subtext}>
+                    Letzte Aktualisierung: {record.timestamp.toLocaleString()}
+                </Text>
+            </div>
+        </>
+    );
+};
 
-const SensorTooltip = ({ record }: { record: SensorInfo }) => {    
-    return <>
-        <div className={styles.header}>
-            <Text className={styles.title}>
-                Feuchte: {record.percent} %
-            </Text>
-        </div>
-        <div className={styles.inner}>
-            <Text className={styles.subtext}>
-                Letzte Aktualisierung: {record.timestamp.toLocaleString()}
-            </Text>
-        </div>
-    </>
-}
-
-export default SensorTooltip
+export default SensorTooltip;

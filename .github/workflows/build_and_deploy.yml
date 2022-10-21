@@ -4,50 +4,50 @@
 name: Node.js CI
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    push:
+        branches: ["main"]
+    pull_request:
+        branches: ["main"]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+    build:
+        runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x]
+        strategy:
+            matrix:
+                node-version: [16.x]
 
-    steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: 🔨 Build Project
-      run: |
-        npm install
-        npm run build:ci
-    - uses: actions/upload-artifact@v2
-      with:
-        name: teuto_map_artifact
-        path: build
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.ref == 'refs/heads/main'
-    steps:
-    - uses: actions/download-artifact@v2
-      with:
-        name: teuto_map_artifact
-        path: build_artifact
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.0
-      with:
-        server: www81.your-server.de
-        username: tillyv_0
-        password: ${{ secrets.TEUTO_MAP_FTP_PASSWORD }}
-        protocol: ftps
-        port: 21
-        local-dir: build_artifact/
+        steps:
+            - name: 🚚 Get latest code
+              uses: actions/checkout@v3
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: "npm"
+            - name: 🔨 Build Project
+              run: |
+                  npm install
+                  npm run build:ci
+            - uses: actions/upload-artifact@v2
+              with:
+                  name: teuto_map_artifact
+                  path: build
+    deploy:
+        runs-on: ubuntu-latest
+        needs: build
+        if: github.ref == 'refs/heads/main'
+        steps:
+            - uses: actions/download-artifact@v2
+              with:
+                  name: teuto_map_artifact
+                  path: build_artifact
+            - name: 📂 Sync files
+              uses: SamKirkland/FTP-Deploy-Action@4.3.0
+              with:
+                  server: www81.your-server.de
+                  username: tillyv_0
+                  password: ${{ secrets.TEUTO_MAP_FTP_PASSWORD }}
+                  protocol: ftps
+                  port: 21
+                  local-dir: build_artifact/
