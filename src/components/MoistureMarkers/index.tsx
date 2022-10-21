@@ -1,21 +1,18 @@
 import L from 'leaflet';
 import * as React from 'react';
 import { Marker, Popup } from "react-leaflet";
-import { FontWeights, getTheme, mergeStyleSets, Overlay, Text } from '@fluentui/react';
+import { FontWeights, mergeStyleSets, Overlay } from '@fluentui/react';
 import './index.css'
-import useFetch from 'use-http';
-import { Measurement, MeasurementData } from '../../model/models';
+import { SensorInfo } from '../../model/models';
 import { renderToString } from 'react-dom/server'
 
 import tree_green from '../../resources/images/tree_green_50.png'
 import tree_yellow from '../../resources/images/tree_yellow_50.png'
 import tree_brown from '../../resources/images/tree_brown_50.png'
 import tree_dead from '../../resources/images/tree_dead_50.png'
+import SensorTooltip from '../SensorTooltip';
+import useMoistureData from '../../hooks/useMoistureData';
 
-
-const MOISTURE_DATA_URL = process.env.REACT_APP_MOISTURE_DATA_URL 
-
-const theme = getTheme();
 const styles = mergeStyleSets({
     buttonArea: {
         verticalAlign: 'top',
@@ -28,39 +25,12 @@ const styles = mergeStyleSets({
     callout: {
         maxWidth: 300,
     },
-    header: {
-        padding: '12px 18px 12px',
-    },
-    title: [
-        theme.fonts.xLarge,
-        {
-            margin: 0,
-            fontWeight: FontWeights.semilight,
-        },
-    ],
-    inner: {
-        height: '100%',
-        padding: '0 18px 15px',
-    },
     actions: {
         position: 'relative',
         marginTop: 20,
         width: '100%',
         whiteSpace: 'nowrap',
     },
-    subtext: [
-        theme.fonts.small,
-        {
-            margin: 0,
-            fontWeight: FontWeights.semilight,
-        },
-    ],
-    link: [
-        theme.fonts.medium,
-        {
-            color: theme.palette.neutralPrimary,
-        },
-    ],
     overlay: {
         "z-index": 9000,
         "display": "flex",
@@ -72,33 +42,26 @@ const styles = mergeStyleSets({
         color: "white",
         fontWeight: FontWeights.semibold,
         fontSize: 20
-
-    },
-    tree_icon: {
-        top: -59,
-        left: -26,
-        position: "relative"
     }
 });
 
 
-
-const icon = (record: Measurement) => L.divIcon({
+const icon = (record: SensorInfo) => L.divIcon({
     className: "custom-pin",
-    iconAnchor: [4, 24],
-    popupAnchor: [4, -36],
-    html: renderToString(<img src={getImageForMeasurment(record)} className={styles.tree_icon} alt={"tag"}></img>)
+    iconAnchor: [30, 83],
+    popupAnchor: [-14, -83],
+    html: renderToString(<img src={getImageForMeasurment(record)} alt={"tag"}></img>)
 })
 
-const getImageForMeasurment = (record: Measurement) => {
-    return record.percent < 10 ? tree_dead        : 
-    record.percent < 20 ? tree_brown : 
-    record.percent < 25 ? tree_yellow :
-    tree_green;
+const getImageForMeasurment = (record: SensorInfo) => {
+    return record.percent < 10 ? tree_dead :
+        record.percent < 20 ? tree_brown :
+            record.percent < 25 ? tree_yellow :
+                tree_green;
 };
 
 const MoistureMarkers: React.FC = () => {
-    const { loading, error, data } = useFetch<MeasurementData>(MOISTURE_DATA_URL, {}, []);    
+    const { loading, error, data } = useMoistureData()
     if (loading)
         return (
             <Overlay isDarkThemed={true} className={styles.overlay}>
@@ -113,19 +76,10 @@ const MoistureMarkers: React.FC = () => {
     else
         return (<>
             {
-                data?.records?.map((record: Measurement, idx) => (
+                data?.records?.map((record: SensorInfo, idx) => (
                     <Marker key={idx} icon={icon(record)} position={[record.latitude, record.longitude]}>
                         <Popup className="request-popup">
-                            <div className={styles.header}>
-                                <Text className={styles.title}>
-                                    Feuchte: {record.percent} %
-                                </Text>
-                            </div>
-                            <div className={styles.inner}>
-                                <Text className={styles.subtext}>
-                                    Letzte Aktualisierung: {new Date(data.timestamp).toLocaleString()}
-                                </Text>
-                            </div>
+                            <SensorTooltip record={record} />
                         </Popup>
                     </Marker>
                 ))
