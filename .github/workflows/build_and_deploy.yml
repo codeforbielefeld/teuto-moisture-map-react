@@ -54,3 +54,5 @@ jobs:
                   role-to-assume: ${{ secrets.DEPLOY_ROLE }}
             - name: 📂 Sync files to S3
               run: aws s3 sync ./build_artifact/ s3://tmm-frontend --delete
+            - name: Invalidate Cloudfront Cache
+              run: aws cloudfront create-invalidation --distribution-id=${{ secrets.DISTRIBUTION_ID }} --paths /
