@@ -12,7 +12,7 @@ const MOCK_DATA: MoistureDataDto = {
             latitude: 52.03333,
             longitude: 8.53333,
             altitude: 0,
-            percent: 13.37,
+            soil_moisture: 13.37,
             device: "mock",
         },
     ],

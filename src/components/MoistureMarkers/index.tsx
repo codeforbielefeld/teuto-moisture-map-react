@@ -55,11 +55,11 @@ const icon = (record: SensorInfo) =>
     });
 
 const getImageForMeasurment = (record: SensorInfo) => {
-    return record.percent < 10
+    return record.soil_moisture < 10
         ? tree_dead
-        : record.percent < 20
+        : record.soil_moisture < 20
         ? tree_brown
-        : record.percent < 25
+        : record.soil_moisture < 25
         ? tree_yellow
         : tree_green;
 };

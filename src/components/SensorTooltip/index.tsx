@@ -38,7 +38,7 @@ const SensorTooltip = ({ record }: { record: SensorInfo }) => {
         <>
             <div className={styles.header}>
                 <Text className={styles.title}>
-                    Feuchte: {record.percent} %
+                    Feuchte: {record.soil_moisture} %
                 </Text>
             </div>
             <div className={styles.inner}>

@@ -3,7 +3,7 @@ export interface SensorInfoDto {
     altitude: number;
     latitude: number;
     longitude: number;
-    percent: number;
+    soil_moisture: number;
 }
 export interface MoistureDataDto {
     records: SensorInfoDto[];
@@ -16,7 +16,7 @@ export interface SensorInfo {
     altitude: number;
     latitude: number;
     longitude: number;
-    percent: number;
+    soil_moisture: number;
     timestamp: Date;
 }
 
