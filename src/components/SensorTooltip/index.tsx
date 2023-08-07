@@ -25,6 +25,12 @@ const styles = mergeStyleSets({
             fontWeight: FontWeights.semilight,
         },
     ],
+    footer: [
+        {
+            margin: 0,
+            marginTop: "10px",
+        },
+    ],
     link: [
         theme.fonts.medium,
         {
@@ -34,17 +40,62 @@ const styles = mergeStyleSets({
 });
 
 const SensorTooltip = ({ record }: { record: SensorInfo }) => {
+    const format = (n: number) =>
+        new Intl.NumberFormat("de-DE", {
+            maximumFractionDigits: 2,
+        }).format(n);
     return (
         <>
             <div className={styles.header}>
                 <Text className={styles.title}>
-                    Feuchte: {Number(record.soil_moisture).toFixed(2)} %
+                    Bodenfeuchte {format(record.soil_moisture)} %
                 </Text>
             </div>
             <div className={styles.inner}>
-                <Text className={styles.subtext}>
-                    Letzte Aktualisierung: {record.timestamp.toLocaleString()}
-                </Text>
+                <table>
+                    <tbody>
+                        {record.soil_temperature != null && (
+                            <tr>
+                                <td>
+                                    <Text>Bodentemperatur</Text>
+                                </td>
+                                <td>
+                                    <Text>
+                                        {format(record.soil_temperature)} °C
+                                    </Text>
+                                </td>
+                            </tr>
+                        )}
+                        {record.soil_conductivity != null && (
+                            <tr>
+                                <td>
+                                    <Text>Leitfähigkeit</Text>
+                                </td>
+                                <td>
+                                    <Text>
+                                        {format(record.soil_conductivity)} μS/cm
+                                    </Text>
+                                </td>
+                            </tr>
+                        )}
+                        {record.battery != null && (
+                            <tr>
+                                <td>
+                                    <Text>Batteriespannung</Text>
+                                </td>
+                                <td>
+                                    <Text>{format(record.battery)} V</Text>
+                                </td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+                <div className={styles.footer}>
+                    <Text className={styles.subtext}>
+                        Letzte Aktualisierung:{" "}
+                        {record.last_updated.toLocaleString()}
+                    </Text>
+                </div>
             </div>
         </>
     );

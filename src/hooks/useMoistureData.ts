@@ -14,17 +14,21 @@ const MOCK_DATA: MoistureDataDto = {
             altitude: 0,
             soil_moisture: 13.37,
             device: "mock",
+            last_update: "1970-01-01 00:00:00",
         },
     ],
 };
 
 function processData(data: MoistureDataDto): MoistureData {
-    const timestamp = new Date(
-        /\+|Z/i.test(data.timestamp) ? data.timestamp : data.timestamp + "Z"
-    );
+    function toDate(timestamp: string): Date {
+        return new Date(/\+|Z/i.test(timestamp) ? timestamp : timestamp + "Z");
+    }
+    const timestamp = toDate(data.timestamp);
     return {
         records: data.records.map((record) => {
-            return { ...record, timestamp };
+            const last_updated = toDate(record.last_update);
+            console.log(record.last_update);
+            return { ...record, last_updated };
         }),
         timestamp,
     };

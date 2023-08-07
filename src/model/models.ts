@@ -4,6 +4,10 @@ export interface SensorInfoDto {
     latitude: number;
     longitude: number;
     soil_moisture: number;
+    soil_temperature?: number;
+    soil_conductivity?: number;
+    battery?: number;
+    last_update: string;
 }
 export interface MoistureDataDto {
     records: SensorInfoDto[];
@@ -17,7 +21,10 @@ export interface SensorInfo {
     latitude: number;
     longitude: number;
     soil_moisture: number;
-    timestamp: Date;
+    soil_temperature?: number;
+    soil_conductivity?: number;
+    battery?: number;
+    last_updated: Date;
 }
 
 export interface MoistureData {
