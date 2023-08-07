@@ -7,11 +7,7 @@ interface SidePanelProps {
     dismissPanel: () => void;
 }
 
-const SidePanel: React.FunctionComponent<SidePanelProps> = ({
-    children,
-    isOpen,
-    dismissPanel,
-}) => (
+const SidePanel: React.FunctionComponent<SidePanelProps> = ({ children, isOpen, dismissPanel }) => (
     <Panel
         className="SidePanel"
         isBlocking={true}

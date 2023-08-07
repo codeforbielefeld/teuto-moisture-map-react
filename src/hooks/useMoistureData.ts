@@ -12,7 +12,8 @@ const MOCK_DATA: MoistureDataDto = {
             latitude: 52.03333,
             longitude: 8.53333,
             altitude: 0,
-            soil_moisture: 13.37,
+            soil_moisture: 13,
+            avg_soil_moisture: 13.37,
             device: "mock",
             last_update: "1970-01-01 00:00:00",
         },
@@ -47,9 +48,7 @@ export default function useMoistureData(): MoistureState {
         error,
         data: dto,
         cache,
-    } = useFetch<MoistureDataDto>(MOISTURE_DATA_URL, { cache: "reload" }, [
-        signal,
-    ]);
+    } = useFetch<MoistureDataDto>(MOISTURE_DATA_URL, { cache: "reload" }, [signal]);
     const reload = useCallback(() => {
         cache.clear();
         setSignal(!signal);
@@ -86,9 +85,7 @@ export default function useMoistureData(): MoistureState {
     }
 
     const data = dto ? processData(dto) : undefined;
-    validTo.current = data
-        ? add(data.timestamp, { days: 1, minutes: 1 })
-        : add(new Date(), { minutes: 5 });
+    validTo.current = data ? add(data.timestamp, { days: 1, minutes: 1 }) : add(new Date(), { minutes: 5 });
 
     return { loading, error, data };
 }

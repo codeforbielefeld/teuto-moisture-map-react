@@ -9,12 +9,7 @@ interface CommandBarProps {
     openInfo: () => void;
 }
 
-const AppCommandBar: React.FunctionComponent<CommandBarProps> = ({
-    zoomIn,
-    zoomOut,
-    openImprint,
-    openInfo,
-}) => (
+const AppCommandBar: React.FunctionComponent<CommandBarProps> = ({ zoomIn, zoomOut, openImprint, openInfo }) => (
     <div className={"CommandBar"}>
         <CommandBar
             translate={"no"}

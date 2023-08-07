@@ -40,60 +40,48 @@ const styles = mergeStyleSets({
 });
 
 const SensorTooltip = ({ record }: { record: SensorInfo }) => {
-    const format = (n: number) =>
-        new Intl.NumberFormat("de-DE", {
-            maximumFractionDigits: 2,
-        }).format(n);
+    const format = (n: number) => new Intl.NumberFormat("de-DE", { maximumFractionDigits: 2 }).format(Number(n));
     return (
         <>
-            <div className={styles.header}>
-                <Text className={styles.title}>
-                    Bodenfeuchte {format(record.soil_moisture)} %
-                </Text>
-            </div>
             <div className={styles.inner}>
                 <table>
+                    <thead>
+                        <td></td>
+                        <td>tagesmittel</td>
+                        <td>letzte</td>
+                    </thead>
                     <tbody>
-                        {record.soil_temperature != null && (
+                        <tr>
+                            <td>Bodenfeuchte</td>
+                            <td>{format(record.avg_soil_moisture)} %</td>
+                            <td>{format(record.soil_moisture)} %</td>
+                        </tr>
+                        {record.soil_temperature != null && record.avg_soil_temperature != null && (
                             <tr>
-                                <td>
-                                    <Text>Bodentemperatur</Text>
-                                </td>
-                                <td>
-                                    <Text>
-                                        {format(record.soil_temperature)} °C
-                                    </Text>
-                                </td>
+                                <td>Bodentemperatur</td>
+                                <td>{format(record.avg_soil_temperature)} °C</td>
+                                <td>{format(record.soil_temperature)} °C</td>
                             </tr>
                         )}
-                        {record.soil_conductivity != null && (
+                        {record.soil_conductivity != null && record.avg_soil_conductivity != null && (
                             <tr>
-                                <td>
-                                    <Text>Leitfähigkeit</Text>
-                                </td>
-                                <td>
-                                    <Text>
-                                        {format(record.soil_conductivity)} μS/cm
-                                    </Text>
-                                </td>
+                                <td>Leitfähigkeit</td>
+                                <td>{format(record.avg_soil_conductivity)} μS/cm</td>
+                                <td>{format(record.soil_conductivity)} μS/cm</td>
                             </tr>
                         )}
-                        {record.battery != null && (
+                        {record.battery != null && record.avg_battery != null && (
                             <tr>
-                                <td>
-                                    <Text>Batteriespannung</Text>
-                                </td>
-                                <td>
-                                    <Text>{format(record.battery)} V</Text>
-                                </td>
+                                <td>Batteriespannung</td>
+                                <td>{format(record.avg_battery)} V</td>
+                                <td>{format(record.battery)} V</td>
                             </tr>
                         )}
                     </tbody>
                 </table>
                 <div className={styles.footer}>
                     <Text className={styles.subtext}>
-                        Letzte Aktualisierung:{" "}
-                        {record.last_updated.toLocaleString()}
+                        Letzte Aktualisierung: {record.last_updated.toLocaleString()}
                     </Text>
                 </div>
             </div>

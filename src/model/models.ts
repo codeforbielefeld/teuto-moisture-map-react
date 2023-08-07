@@ -6,7 +6,11 @@ export interface SensorInfoDto {
     soil_moisture: number;
     soil_temperature?: number;
     soil_conductivity?: number;
+    avg_soil_moisture: number;
+    avg_soil_temperature?: number;
+    avg_soil_conductivity?: number;
     battery?: number;
+    avg_battery?: number;
     last_update: string;
 }
 export interface MoistureDataDto {
@@ -23,7 +27,11 @@ export interface SensorInfo {
     soil_moisture: number;
     soil_temperature?: number;
     soil_conductivity?: number;
+    avg_soil_moisture: number;
+    avg_soil_temperature?: number;
+    avg_soil_conductivity?: number;
     battery?: number;
+    avg_battery?: number;
     last_updated: Date;
 }
 

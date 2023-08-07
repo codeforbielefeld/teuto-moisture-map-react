@@ -26,10 +26,8 @@ function App() {
     const [map, setMap] = React.useState<LeafletMap>();
     const zoom = 13;
 
-    const [imprintOpen, { setTrue: openImprint, setFalse: dismissImprint }] =
-        useBoolean(false);
-    const [infoOpen, { setTrue: openInfo, setFalse: dismissInfo }] =
-        useBoolean(false);
+    const [imprintOpen, { setTrue: openImprint, setFalse: dismissImprint }] = useBoolean(false);
+    const [infoOpen, { setTrue: openInfo, setFalse: dismissInfo }] = useBoolean(false);
 
     useEffect(() => {
         const cb = () => setHeight(window.innerHeight);
@@ -39,22 +37,13 @@ function App() {
 
     return (
         <div className="App">
-            <SidePanel
-                isOpen={infoOpen}
-                dismissPanel={() => dismissInfo()}
-                children={<Markdown file={"info.md"} />}
-            />
+            <SidePanel isOpen={infoOpen} dismissPanel={() => dismissInfo()} children={<Markdown file={"info.md"} />} />
             <SidePanel
                 isOpen={imprintOpen}
                 dismissPanel={() => dismissImprint()}
                 children={<Markdown file={"imprint.md"} />}
             />
-            <MapContainer
-                zoomControl={false}
-                center={position}
-                zoom={zoom}
-                style={{ height: height }}
-            >
+            <MapContainer zoomControl={false} center={position} zoom={zoom} style={{ height: height }}>
                 <MapHack setMap={setMap} />
                 <MoistureMarkers />
                 <TileLayer

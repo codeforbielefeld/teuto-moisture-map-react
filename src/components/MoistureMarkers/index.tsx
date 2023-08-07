@@ -49,9 +49,7 @@ const icon = (record: SensorInfo) =>
         className: "custom-pin",
         iconAnchor: [30, 83],
         popupAnchor: [-14, -83],
-        html: renderToString(
-            <img src={getImageForMeasurment(record)} alt={"tag"}></img>,
-        ),
+        html: renderToString(<img src={getImageForMeasurment(record)} alt={"tag"}></img>),
     });
 
 const getImageForMeasurment = (record: SensorInfo) => {
@@ -75,20 +73,14 @@ const MoistureMarkers: React.FC = () => {
     else if (error)
         return (
             <Overlay isDarkThemed={true} className={styles.overlay}>
-                <div className={styles.loading}>
-                    Fehler beim Laden der Daten :(
-                </div>
+                <div className={styles.loading}>Fehler beim Laden der Daten :(</div>
             </Overlay>
         );
     else
         return (
             <>
                 {data?.records?.map((record: SensorInfo, idx) => (
-                    <Marker
-                        key={idx}
-                        icon={icon(record)}
-                        position={[record.latitude, record.longitude]}
-                    >
+                    <Marker key={idx} icon={icon(record)} position={[record.latitude, record.longitude]}>
                         <Popup className="request-popup">
                             <SensorTooltip record={record} />
                         </Popup>
