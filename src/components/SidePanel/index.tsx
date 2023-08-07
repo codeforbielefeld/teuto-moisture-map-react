@@ -2,6 +2,7 @@ import * as React from "react";
 import { Panel, PanelType } from "@fluentui/react";
 
 interface SidePanelProps {
+    children: JSX.Element;
     isOpen: boolean;
     dismissPanel: () => void;
 }

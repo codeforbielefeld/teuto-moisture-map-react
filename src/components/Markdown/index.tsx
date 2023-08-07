@@ -1,12 +1,25 @@
+import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import raw from "raw.macro";
 
-const Markdown = ({ file }: { file: string }) => (
-    <ReactMarkdown
-        children={raw(`../../resources/markdown/${file}`)}
-        remarkPlugins={[remarkGfm]}
-    />
-);
+const Markdown = ({ file }: { file: string }) => {
+    const [content, setContent] = useState("");
+
+    useEffect(() => {
+        const fetchMarkdown = async () => {
+            try {
+                const response = await fetch(`../../markdown/${file}`);
+                const markdownContent = await response.text();
+                setContent(markdownContent);
+            } catch (error) {
+                console.error("Error fetching Markdown:", error);
+            }
+        };
+
+        fetchMarkdown();
+    }, [file]);
+
+    return <ReactMarkdown children={content} remarkPlugins={[remarkGfm]} />;
+};
 
 export default Markdown;

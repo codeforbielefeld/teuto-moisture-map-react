@@ -50,7 +50,7 @@ const icon = (record: SensorInfo) =>
         iconAnchor: [30, 83],
         popupAnchor: [-14, -83],
         html: renderToString(
-            <img src={getImageForMeasurment(record)} alt={"tag"}></img>
+            <img src={getImageForMeasurment(record)} alt={"tag"}></img>,
         ),
     });
 

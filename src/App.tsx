@@ -1,13 +1,24 @@
 import React, { useEffect } from "react";
-import { Map as LeafletMap } from "leaflet";
 import "./App.css";
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { Map as LeafletMap } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import AppCommandBar from "./components/CommandBar";
 import SidePanel from "./components/SidePanel";
 import { useBoolean } from "@fluentui/react-hooks";
 import MoistureMarkers from "./components/MoistureMarkers";
 import Markdown from "./components/Markdown";
+
+/*  Leaflet only allows us to use "useMap" inside a MapContainer.
+    As the Toolbar is outside of the MapContainer we use this fake child component to 
+    export it. 
+ */
+
+function MapHack({ setMap }: { setMap: any }): null {
+    const map = useMap();
+    setMap(map);
+    return null;
+}
 
 function App() {
     const [height, setHeight] = React.useState(window.innerHeight);
@@ -43,8 +54,8 @@ function App() {
                 center={position}
                 zoom={zoom}
                 style={{ height: height }}
-                whenCreated={setMap}
             >
+                <MapHack setMap={setMap} />
                 <MoistureMarkers />
                 <TileLayer
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
