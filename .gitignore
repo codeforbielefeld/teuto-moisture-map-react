@@ -25,4 +25,5 @@ yarn-error.log*
 
 /.idea
 /.vscode
+*scratch*
 

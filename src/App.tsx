@@ -16,7 +16,9 @@ import Markdown from "./components/Markdown";
 
 function MapHack({ setMap }: { setMap: any }): null {
     const map = useMap();
-    setMap(map);
+    useEffect(() => {
+        setMap(map);
+    });
     return null;
 }
 
