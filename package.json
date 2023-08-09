@@ -2,67 +2,56 @@
     "name": "teuto-moisture-map-react",
     "version": "0.1.0",
     "private": true,
+    "type": "module",
     "dependencies": {
         "@fluentui/font-icons-mdl2": "^8.5.23",
         "@fluentui/react": "^8.110.12",
         "@fluentui/react-hooks": "^8.6.29",
-        "@testing-library/jest-dom": "^5.17.0",
-        "@testing-library/react": "^14.0.0",
-        "@testing-library/user-event": "^14.4.3",
-        "@types/jest": "^29.5.3",
-        "@types/node": "^20.4.8",
-        "@types/react": "^18.2.18",
+        "@types/leaflet": "^1.9.3",
+        "@types/node": "^20.4.9",
+        "@types/react": "^18",
         "@types/react-dom": "^18.2.7",
         "date-fns": "^2.30.0",
         "leaflet": "^1.9.4",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-leaflet": "^4.2.1",
-        "react-markdown": "^8.0.7",
-        "react-scripts": "5.0.1",
-        "remark-gfm": "^3.0.1",
-        "serve": "^14.2.0",
-        "typescript": "^4",
-        "use-http": "^1.0.28",
-        "web-vitals": "^3.4.0"
+        "use-http": "^1.0.28"
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "prod": "react-scripts build && serve -s build",
+        "prebuild": "rm -rf dist",
+        "build": "vite build",
+        "start": "vite --open",
+        "serve": "npm run build && cd dist && serve",
         "prettier": "prettier --write .",
-        "build:ci": "CI=false && REACT_APP_ENV=production && react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject",
+        "lint": "eslint src && tsc --noEmit",
+        "clean": "rm -rf dist",
         "prepare": "husky install"
     },
     "eslintConfig": {
         "extends": [
             "react-app",
-            "react-app/jest",
             "prettier"
         ]
     },
     "lint-staged": {
         "**/*": "prettier --write --ignore-unknown"
     },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
+    "browserslist": "defaults",
     "devDependencies": {
-        "@types/leaflet": "^1.9.3",
+        "@vitejs/plugin-react-swc": "^3.5.0",
+        "eslint": "^8.46.0",
         "eslint-config-prettier": "^9.0.0",
+        "eslint-config-react-app": "^7.0.1",
         "husky": "^8.0.3",
-        "lint-staged": "^13.2.3",
-        "prettier": "^3.0.1"
+        "lint-staged": ">=13",
+        "prettier": "^3.0.1",
+        "process": "^0.11.10",
+        "react-jsx": "^1.0.0",
+        "serve": "^14.2.0",
+        "serve-static": "^1.15.0",
+        "typescript": "^5",
+        "vite": "^5.0.11",
+        "vite-plugin-markdown": "^2.2.0-4"
     }
 }

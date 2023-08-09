@@ -1,6 +1,6 @@
 import L from "leaflet";
 import * as React from "react";
-import { Marker, Popup } from "react-leaflet";
+import { Marker, Popup, useMap } from "react-leaflet";
 import { FontWeights, mergeStyleSets, Overlay } from "@fluentui/react";
 import "./index.css";
 import { SensorInfo } from "../../model/models";
@@ -56,14 +56,17 @@ const getImageForMeasurment = (record: SensorInfo) => {
     return record.soil_moisture < 10
         ? tree_dead
         : record.soil_moisture < 20
-        ? tree_brown
-        : record.soil_moisture < 25
-        ? tree_yellow
-        : tree_green;
+          ? tree_brown
+          : record.soil_moisture < 25
+            ? tree_yellow
+            : tree_green;
 };
 
 const MoistureMarkers: React.FC = () => {
     const { loading, error, data } = useMoistureData();
+    const map = useMap();
+    const [boundingBox, setBoundingBox] = React.useState<number[][]>([]);
+
     if (loading)
         return (
             <Overlay isDarkThemed={true} className={styles.overlay}>
@@ -76,7 +79,22 @@ const MoistureMarkers: React.FC = () => {
                 <div className={styles.loading}>Fehler beim Laden der Daten :(</div>
             </Overlay>
         );
-    else
+    else {
+        const lats = data?.records?.map((record) => record.latitude);
+        const longs = data?.records?.map((record) => record.longitude);
+        if (lats && longs) {
+            const newBB = [
+                [Math.min(...lats), Math.min(...longs)],
+                [Math.max(...lats), Math.max(...longs)],
+            ];
+            if (JSON.stringify(newBB) !== JSON.stringify(boundingBox)) {
+                map.fitBounds([
+                    [Math.min(...lats), Math.min(...longs)],
+                    [Math.max(...lats), Math.max(...longs)],
+                ]);
+                setBoundingBox(newBB);
+            }
+        }
         return (
             <>
                 {data?.records?.map((record: SensorInfo, idx) => (
@@ -88,6 +106,7 @@ const MoistureMarkers: React.FC = () => {
                 ))}
             </>
         );
+    }
 };
 
 export default MoistureMarkers;

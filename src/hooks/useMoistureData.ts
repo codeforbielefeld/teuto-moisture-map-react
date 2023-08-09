@@ -3,7 +3,9 @@ import { MoistureData, MoistureDataDto } from "../model/models";
 import add from "date-fns/add";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const MOISTURE_DATA_URL = process.env.REACT_APP_MOISTURE_DATA_URL;
+const MOISTURE_DATA_URL = import.meta.env.VITE_MOISTURE_DATA_URL;
+
+console.log(MOISTURE_DATA_URL);
 
 const MOCK_DATA: MoistureDataDto = {
     timestamp: "1970-01-01 00:00:00",
@@ -75,7 +77,7 @@ export default function useMoistureData(): MoistureState {
         };
     }, [reload]);
 
-    if (!dto && process.env.NODE_ENV === "development") {
+    if (!dto && import.meta.env.DEV) {
         return {
             loading: false,
             error: undefined,

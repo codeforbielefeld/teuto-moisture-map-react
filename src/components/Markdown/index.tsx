@@ -1,25 +1,4 @@
-import { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { ReactComponent as Imprint } from "../../resources/markdown/imprint.md";
+import { ReactComponent as Info } from "../../resources/markdown/info.md";
 
-const Markdown = ({ file }: { file: string }) => {
-    const [content, setContent] = useState("");
-
-    useEffect(() => {
-        const fetchMarkdown = async () => {
-            try {
-                const response = await fetch(`../../markdown/${file}`);
-                const markdownContent = await response.text();
-                setContent(markdownContent);
-            } catch (error) {
-                console.error("Error fetching Markdown:", error);
-            }
-        };
-
-        fetchMarkdown();
-    }, [file]);
-
-    return <ReactMarkdown children={content} remarkPlugins={[remarkGfm]} />;
-};
-
-export default Markdown;
+export { Imprint, Info };
