@@ -1,15 +1,23 @@
 import * as React from "react";
+import { useState } from "react";
 import { CommandBar } from "@fluentui/react";
 import "./index.css";
-
+//Beispiele für Icons:  https://github.com/OfficeDev/office-ui-fabric-core/blob/master/src/data/icons.json
 interface CommandBarProps {
     zoomIn?: () => void;
     zoomOut?: () => void;
     openImprint: () => void;
     openInfo: () => void;
+    openOverlay?: () => void;
 }
 
-const AppCommandBar: React.FunctionComponent<CommandBarProps> = ({ zoomIn, zoomOut, openImprint, openInfo }) => (
+const AppCommandBar: React.FunctionComponent<CommandBarProps> = ({
+    zoomIn,
+    zoomOut,
+    openImprint,
+    openInfo,
+    openOverlay,
+}) => (
     <div className={"CommandBar"}>
         <CommandBar
             translate={"no"}
@@ -46,6 +54,13 @@ const AppCommandBar: React.FunctionComponent<CommandBarProps> = ({ zoomIn, zoomO
                     name: "Impressum",
                     text: "Impressum",
                     onClick: openImprint,
+                },
+                {
+                    key: "ansicht",
+                    iconProps: { iconName: "MapLayers" },
+                    iconOnly: false,
+                    name: "Ansicht ändern",
+                    onClick: openOverlay,
                 },
             ]}
             ariaLabel="Use left and right arrow keys to navigate between commands"

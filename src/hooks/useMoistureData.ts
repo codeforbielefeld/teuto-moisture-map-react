@@ -28,6 +28,7 @@ function processData(data: MoistureDataDto): MoistureData {
     return {
         records: data.records.map((record) => {
             const last_updated = toDate(record.last_update);
+            console.log(record.last_update);
             return { ...record, last_updated };
         }),
         timestamp,

@@ -46,11 +46,9 @@ const SensorTooltip = ({ record }: { record: SensorInfo }) => {
             <div className={styles.inner}>
                 <table>
                     <thead>
-                        <tr>
-                            <td></td>
-                            <td>tagesmittel</td>
-                            <td>letzte</td>
-                        </tr>
+                        <td></td>
+                        <td>tagesdurchschnitt</td>
+                        <td>letzte</td>
                     </thead>
                     <tbody>
                         <tr>
