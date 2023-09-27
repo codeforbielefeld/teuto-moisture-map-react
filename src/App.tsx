@@ -10,6 +10,7 @@ import MoistureMarkers from "./components/MoistureMarkers";
 import Markdown from "./components/Markdown";
 import ControlOverlayUI from "./components/Overlay/ControlOverlay/ControlOverlayUI";
 import LayerOverlay from "./components/Overlay";
+import VerticalSlider from "./components/depth_slider";
 
 /*  Leaflet only allows us to use "useMap" inside a MapContainer.
     As the Toolbar is outside of the MapContainer we use this fake child component to 
@@ -34,6 +35,7 @@ function App() {
     const [infoOpen, { setTrue: openInfo, setFalse: dismissInfo }] = useBoolean(false);
     const [overlayOpen, { setTrue: openOverlay, setFalse: dismissOverlay }] = useBoolean(false);
     const [showLayer, setShowLayer] = useState<number>(0);
+    const [depthValue, setDepthValue] = useState<number>(0);
 
     useEffect(() => {
         const cb = () => setHeight(window.innerHeight);
@@ -61,6 +63,7 @@ function App() {
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                <VerticalSlider setDepthValue={setDepthValue} depthValue={depthValue} />
                 <LayerOverlay showLayer={showLayer} setShowLayer={setShowLayer} />
             </MapContainer>
             <AppCommandBar
