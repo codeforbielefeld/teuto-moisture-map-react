@@ -1,8 +1,5 @@
 import { FC } from "react";
 
-//noch kein Styling gemacht
-//"Overlay" zu "Ansicht" ändern??
-
 type ControlOverlayUIProps = {
     showLayer: number;
     setShowLayer: React.Dispatch<React.SetStateAction<number>>;

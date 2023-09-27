@@ -1,6 +1,0 @@
-.imgLegend {
-    /*  min-height machen, damit zu kleine Bilder in Höhe mind. 50px haben
-        oder weglassen dann sind Grafiken in guter Auflösung aber evtl zu klein? */
-    max-width: 50%;
-    height: auto;
-}

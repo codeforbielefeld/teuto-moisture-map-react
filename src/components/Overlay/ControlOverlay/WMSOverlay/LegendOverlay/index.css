@@ -1,0 +1,7 @@
+.Legend {
+    right: "10px";
+    top: "10px";
+    position: "absolute";
+    z-index: 1000;
+    opacity: 0.8;
+}
