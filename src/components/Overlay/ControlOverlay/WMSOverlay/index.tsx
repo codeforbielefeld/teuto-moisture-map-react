@@ -2,7 +2,6 @@ import { WMSTileLayer } from "react-leaflet";
 import { FC, useState } from "react";
 import LegendOverlay from "./LegendOverlay";
 import { SquareLoader } from "react-spinners";
-import "./index.css";
 
 type WMSOverlayProps = {
     layerName: string;
@@ -26,11 +25,18 @@ const WMSOverlay: FC<WMSOverlayProps> = ({ layerName, attribution, setShowLayer 
             Das Package: https://www.npmjs.com/package/react-spinners
             Alle Loader visual: https://www.davidhu.io/react-spinners/
             */}
-            {loading && (
-                <div className="loading-spinner">
-                    <SquareLoader color="blue" loading={loading} aria-label="Loading Spinner" data-testid="loader" />
-                </div>
-            )}
+            <div
+                className="loading-spinner"
+                style={{
+                    zIndex: 1000,
+                    position: "absolute",
+                    left: "50%",
+                    top: "50%",
+                    transform: "translate(-50%, -50%)",
+                }}
+            >
+                <SquareLoader color="blue" loading={loading} aria-label="Loading Spinner" data-testid="loader" />
+            </div>
 
             {/*
             Alle Layer: https://cdc.dwd.de/geoserver/web/wicket/bookmarkable/org.geoserver.web.demo.MapPreviewPage?1&filter=false 
