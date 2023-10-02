@@ -51,6 +51,25 @@ jobs:
                   aws-region: eu-central-1
                   role-to-assume: ${{ secrets.DEPLOY_ROLE }}
             - name: 📂 Sync files to S3
-              run: aws s3 sync ./build_artifact/ s3://tmm-frontend --delete
+              run: aws s3 sync ./build_artifact/ s3://${{ secrets.S3_BUCKET }} --delete
+            - name: Invalidate Cloudfront Cache
+              run: aws cloudfront create-invalidation --distribution-id=${{ secrets.DISTRIBUTION_ID }} --paths /
+    deploy-prod:
+        if: github.ref == 'refs/heads/prod'
+        runs-on: ubuntu-latest
+        needs: build
+        environment: aws_prod
+        steps:
+            - uses: actions/download-artifact@v3
+              with:
+                  name: teuto_map_artifact
+                  path: build_artifact
+            - name: Configure AWS Credentials
+              uses: aws-actions/configure-aws-credentials@v2
+              with:
+                  aws-region: eu-central-1
+                  role-to-assume: ${{ secrets.DEPLOY_ROLE }}
+            - name: 📂 Sync files to S3
+              run: aws s3 sync ./build_artifact/ s3://${{ secrets.S3_BUCKET }} --delete
             - name: Invalidate Cloudfront Cache
               run: aws cloudfront create-invalidation --distribution-id=${{ secrets.DISTRIBUTION_ID }} --paths /
