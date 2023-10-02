@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "tmm-frontend-terraform"
+    bucket = "code4bielefeld-tmm-frontend-terraform"
     key    = "frontend.tfstate"
     region = "eu-central-1"
   }

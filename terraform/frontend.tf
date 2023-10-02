@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "frontend_bucket" {
-  bucket = "${local.prefix2}-source"
+  bucket = "${local.prefix2}-src"
 }
 
 resource "aws_s3_bucket_policy" "cf_distribution_s3_access_policy" {
