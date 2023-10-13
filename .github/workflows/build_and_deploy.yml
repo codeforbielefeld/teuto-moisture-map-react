@@ -35,7 +35,8 @@ jobs:
               with:
                   name: teuto_map_artifact
                   path: build
-    deploy:
+                  retention-days: 30
+    deploy-dev:
         if: github.ref == 'refs/heads/main'
         runs-on: ubuntu-latest
         needs: build
@@ -55,9 +56,10 @@ jobs:
             - name: Invalidate Cloudfront Cache
               run: aws cloudfront create-invalidation --distribution-id=${{ secrets.DISTRIBUTION_ID }} --paths /
     deploy-prod:
-        if: github.ref == 'refs/heads/prod'
         runs-on: ubuntu-latest
-        needs: build
+        needs:
+            - build
+            - deploy-dev
         environment: aws_prod
         steps:
             - uses: actions/download-artifact@v3
