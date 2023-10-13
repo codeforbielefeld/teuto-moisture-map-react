@@ -67,6 +67,7 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
         forward = "none"
       }
     }
+
   }
 
   restrictions {
@@ -75,8 +76,12 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
       restriction_type = "none"
     }
   }
-  
+
   viewer_certificate {
     cloudfront_default_certificate = true
+  }
+
+  lifecycle {
+    ignore_changes = [viewer_certificate, aliases]
   }
 }
