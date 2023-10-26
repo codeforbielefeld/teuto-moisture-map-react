@@ -7,7 +7,7 @@ Dr. Meike Wocken \
 Obernstr. 2 \
 33602 Bielefeld \
 E-Mail: teuto.bodensensor@gmail.com \
-Tel.: +49 151 7444 4894 \
+Tel.: +49 151 7444 4894
 
 Vereinsregister: Vereinsregister des Amtsgerichts Bielefeld, VR4790
 
@@ -34,7 +34,7 @@ Code for Bielefeld e.V. ℅ codecentric AG \
 z.Hd. Meike Wocken \
 Obernstr. 2 \
 33602 Bielefeld \
-E-Mail: teuto.bodensensor@gmail.com \
+E-Mail: teuto.bodensensor@gmail.com
 
 ## Datenschutzerklärung
 
