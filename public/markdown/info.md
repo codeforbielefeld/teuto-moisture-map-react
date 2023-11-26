@@ -1,4 +1,4 @@
-# Wie kann mitgemacht werden?
+# Informationen zum Projekt zur Sichtbarmachung von Bodenfeuchtigkeit im Teutoburger Wald
 
 Unser Projekt lebt von Datenpunkten - wir laden daher alle Menschen ein, sich mit ihren Sensoren in unser Projekt einzubringen. Im folgenden wird die Möglichkeit sowohl einer **Sensorpatenschaft** vorgestellt als auch die **Nutzung von unseren Daten**, u.a. im Rahmen von Workshops.
 
