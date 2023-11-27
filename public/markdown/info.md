@@ -196,4 +196,4 @@ Die Gruppe Code for Bielefeld gehört zu dem Netzwerk Code for Germany, das von 
 
 Die Gruppe Code for Bielefeld ist 2020 gegründet worden und seit 2023 ein eingetragener Verein. Neben dem Projekt zur Sichtbarmachung von Bodenfeuchte im Teutoburger Wald setzen wir weitere Projekte um, wie bspw. Gieß den Kiez, engagieren uns in Gremien der Stadt zu digitalen Themen, halten Vorträge an Schulen und führen Workshops durch, um unser Wissen mit Bürger:innen und Schüler:innen zu teilen.
 
-Mehr Infos findet ihr unter der [Code for-Webseite](www.codefor.de/bielefeld).
+Mehr Infos findet ihr unter der [Code for-Webseite](https://www.codefor.de/bielefeld).
