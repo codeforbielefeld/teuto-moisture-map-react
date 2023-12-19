@@ -21,8 +21,8 @@ Für die Inbetriebnahme des Sensors muss zuerst die beiliegende Antenne auf den 
 Zum Einschalten muss der Jumper (gelbes Teil, in der grünen Markierung auf dem ersten Bild zu sehen) auf JP2 (im zweiten Bild ohne Jumper zu sehen) auf beide Stifte gesetzt werden (siehe drittes Bild). Initial sitzt der Jumper nur auf einem der beiden Stifte. Er lässt sich leicht davon abziehen, um dann auf beide Stifte gesetzt zu werden. Die grüne LED zeigt den Erfolg mit Blinken an.
 
 ![**Abbildung 1: Darstellung des aufgeschraubten Dragino LSE01. Markierung des Jumpers und JP2, zum Einschalten der Batterie.**](/img/info/Batterie.jpg)
+_Abbildung 1: Darstellung des aufgeschraubten Dragino LSE01. Markierung des Jumpers und JP2, zum Einschalten der Batterie._
 
-\
 \
 Anschließend muss der Sensor mit den vier Schrauben zugeschraubt werden. Standardmäßig übermittelt der LSE01 mit Betriebsbeginn die Sensordaten alle 20 Minuten.
 
@@ -31,14 +31,14 @@ Anschließend muss der Sensor mit den vier Schrauben zugeschraubt werden. Standa
 Es muss geklärt sein, dass eine Erlaubnis von dem/der Grundstücksbesitzer:in zum Ausbringen des Sensors vorhanden ist. Dann kann der Sensor vergraben werden.
 
 ![**Abbildung 2: Die einzelnen Schritte des Eingrabens eines Bodenfeuchte-Sensors.**](/img/info/eingraben.jpg)
+_Abbildung 2: Die einzelnen Schritte des Eingrabens eines Bodenfeuchte-Sensors._
 
-\
 \
 Dafür wird ein 50cm tiefes Loch gegraben. In das Loch wird flach auf den Boden der Sensor mit den drei Stiften gelegt, siehe auch Abbildung 3. Der Sensor erinnert vom Aussehen dabei an eine Gabel.
 
 ![**Abbildung 3: Waagerechte Ausrichtung des Bodenfeuchte-Sensors im 50cm tiefen Loch im Waldboden.**](/img/info/sensor.jpg)
+_Abbildung 3: Waagerechte Ausrichtung des Bodenfeuchte-Sensors im 50cm tiefen Loch im Waldboden._
 
-\
 \
 Das Loch wird wieder mit Erde aufgefüllt. Die Sendeeinheit wird außerhalb des Lochs platziert, am besten an einem Pfosten o.ä. angebracht, damit er leichter wiederzufinden ist.
 
@@ -53,8 +53,8 @@ In dem TTN-Account gibt es den Bereich **Console**. In der Console wird eine Anw
 In der angelegten Anwendung kann mittels Over The Air Activation (OTAA) mit wenigen Schritten der Bodenfeuchte-Sensor LSE01 als Device hinzugefügt werden. Es wird dafür der Aufkleber auf dem Karton vom LSE01 benötigt mit den Default Angaben zu _DEV EUI_, _APP EUI_ und _APP KEY_. Diese Angaben sind wie auf Abbildung 4 zu sehen für die OTAA-Einrichtung des Sensors einzugeben und zu speichern.
 
 ![**Abbildung 4: Alle Angaben, die für die Over The Air Activation (OTAA) notwendig sind in der TTN-Console.**](/img/info/otta.jpg)
+_Abbildung 4: Alle Angaben, die für die Over The Air Activation (OTAA) notwendig sind in der TTN-Console._
 
-\
 \
 Damit die gesendeten Bytes vom Sensor später als Messwerte in der richtigen Einheit angezeigt werden, ist der vom LSE01 gesendete Payload zu decodieren. Auf der Seite von Dragino stehen Payload Decoder als JavaScript Dateien dafür zur Verfügung: [Dragino Payload Decoder](https://www.dragino.com/downloads/index.php?dir=LoRa_End_Node/LSE01/Payload_Decoder/). Wir haben zur Vereinfachung den Code hier mit eingefügt, um ihn Copy-Paste im Device unter dem Tab “Payload Formatters”
 unter “Uplink”, “Formatter Type” : “JavaScript” einzufügen und mit **Save Changes** zu speichern.
@@ -116,19 +116,16 @@ Um einen Webhook anzulegen geht ihr wieder in die Application, unter der euer Bo
 \
 “Webhook-Format” : “JSON”,
 
-\
 “Base URL” : “https://api.bodenfeuchte.org”,
 
 Fügt einen "Additional header" hinzu mit "TMM-APIKEY" und dem zugesendeten Key aus unserer Email. Als "Enabled event types" ist "Uplink messages" zu wählen und mit "/measurement/ttn" auszufüllen. Seht dazu auch Abbildung 5 an, wie es am Ende auszusehen hat.
 
 ![**Abbildung 5: Angaben zur Einrichtung eines Webhooks für Weitergabe der Daten an das Bodenfeuchte-Projekt von Code Bielefeld e.V.**](/img/info/webhook.jpg)
-
-\
-\
+_Abbildung 5: Angaben zur Einrichtung eines Webhooks für Weitergabe der Daten an das Bodenfeuchte-Projekt von Code Bielefeld e.V._
 
 ### Option B: Einbinden in den The Things Network-Account von Code for Bielefeld
 
-Falls ihr keinen eigenen Account in The Things Network anlegen möchtet, können wir von Code for Bielefeld den Sensor auch bei uns im Account hinzufügen. Dafür müsst ihr den Sensor mit eingeschalteter Batterie vergraben und dann uns die Infos von der Verpackung des Sensors (**DEV EUI**, **APP EUI** und **APP KEY**, gerne als Foto) per E-Mail an teuto.bodensensor@gmail.com zuschicken. Zusätzlich brauchen wir die Koordinaten des Sensor-Standortes und die Angabe, ob der Sensor in freier Natur steht oder auf einer bewirtschafteten Fläche z.B. einer Grünanlage, in der bei Bedarf gegossen wird.
+Falls ihr keinen eigenen Account in The Things Network anlegen möchtet, können wir von Code for Bielefeld den Sensor auch bei uns im Account hinzufügen. Dafür müsst ihr den Sensor mit eingeschalteter Batterie vergraben und dann uns die Infos von der Verpackung des Sensors (**DEV EUI**, **APP EUI** und **APP KEY**, gerne als Foto) per E-Mail an teuto.bodensensor@gmail.com zuschicken. Zusätzlich brauchen wir die Koordinaten des Sensor-Standortes und die Angabe, ob der Sensor in freier Natur steht oder auf einer bewirtschafteten Fläche z.B. einer Grünanlage, in der bei Bedarf gegossen wird. Auch ist es wichtig, das ihr uns mitteilt, in welcher Tiefe der Sensor sich befindet, insbesondere wenn er nicht in 50 cm Tiefe vergraben worden ist.
 
 Der Sensor ist weiterhin im Eigentum des Sensor-Patens und dieser verpflichtet sich, sich um den Sensor zu kümmern. Aufgabe von Code for Bielefeld ist nur, dass die Daten ins TTN kommen und von dort weitergeleitet werden zum Bodenfeuchte-Projekt.
 
@@ -187,7 +184,7 @@ Uns ist klar, das wir kein wissenschaftliches Forschungsprojekt mit exakter Date
 - einfache Grafiken angereichert mit Wissen
 - Commitment der Bürger:innen durch Beteiligung
 
-**Unsere Vision: **
+**Unsere Vision:**
 Bei uns werden Open Data und Citizen Science erlebbar und weitere Innovationen basierend auf Daten werden entstehen!
 
 ## Über Code for Bielefeld e.V.
