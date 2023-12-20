@@ -2,7 +2,7 @@
 
 Unser Projekt lebt von Datenpunkten - wir laden daher alle Menschen ein, sich mit ihren Sensoren in unser Projekt einzubringen. Im folgenden wird die Möglichkeit sowohl einer **Sensorpatenschaft** vorgestellt als auch die **Nutzung von unseren Daten**, u.a. im Rahmen von Workshops.
 
-Eine **Sensorpatenschaft** gibt es in zwei unterschiedlichen Ausführungen. Beides Mal ist der Sensor-Pate verantwortlich für den Sensor:
+Bei einer **Sensorpatenschaft** ist der Sensor-Pate verantwortlich für den Sensor:
 
 - Anschaffung des Sensors: der Sensor bleibt im Besitz des Sensor-Patens
 - Ausbringung im Wald: der Sensor muss 50 cm tief vergraben sein und es muss eine Einwilligung der Waldbesitzer dafür geben. Darum kümmert sich der Sensor-Pate im Vorfeld.
