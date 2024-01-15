@@ -5,8 +5,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const MOISTURE_DATA_URL = import.meta.env.VITE_MOISTURE_DATA_URL;
 
-console.log(MOISTURE_DATA_URL);
-
 const MOCK_DATA: MoistureDataDto = {
     timestamp: "1970-01-01 00:00:00",
     records: [
