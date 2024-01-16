@@ -55,9 +55,9 @@ const icon = (record: SensorInfo) =>
 const getImageForMeasurment = (record: SensorInfo) => {
     return record.soil_moisture < 10
         ? tree_dead
-        : record.soil_moisture < 20
+        : record.soil_moisture < 15
           ? tree_brown
-          : record.soil_moisture < 25
+          : record.soil_moisture < 20
             ? tree_yellow
             : tree_green;
 };
