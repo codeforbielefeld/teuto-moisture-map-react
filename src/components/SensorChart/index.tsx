@@ -13,6 +13,7 @@ import {
 import { Chart } from "react-chartjs-2";
 import { SensorDetails, SensorInfo } from "../../model/models";
 import useSensorDetails from "../../hooks/useSensorDetails";
+import { mergeStyleSets } from "@fluentui/react";
 
 // ChartJS setup
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Tooltip, Legend, LineController);
@@ -92,10 +93,16 @@ function extractRecentDaysDataset(details: SensorDetails): ChartData<"bar" | "li
     };
 }
 
+const style = mergeStyleSets({
+    message: {
+        textAlign: "center",
+        width: "100%",
+    },
+});
+
 export default function SensorChart({ sensorInfo }: { sensorInfo: SensorInfo }) {
-    const { details, loading, error } = useSensorDetails(sensorInfo);
+    const { details, loading } = useSensorDetails(sensorInfo);
     if (details) return <Chart type="line" options={recentDaysChartOptions} data={extractRecentDaysDataset(details)} />;
-    else if (loading) return "Loading";
-    else if (error) return "Error";
-    return "No chart";
+    else if (loading) return <div className={style.message}>lade Verlauf</div>;
+    return <div className={style.message}>Fehler beim Laden :(</div>;
 }
