@@ -59,7 +59,7 @@ const recentDaysChartOptions = {
     },
 };
 
-function extractRecentDaysDataset(details: SensorDetails): ChartData<"bar" | "line", number[], string> {
+function extractRecentDaysDataset(details: SensorDetails): ChartData<"bar" | "line", (number | undefined)[], string> {
     const colors = {
         red: "rgb(255, 99, 132)",
         orange: "rgb(255, 159, 64)",
@@ -70,12 +70,12 @@ function extractRecentDaysDataset(details: SensorDetails): ChartData<"bar" | "li
         grey: "rgb(201, 203, 207)",
     };
     return {
-        labels: details.measurements.map((d) => d.timestamp.toLocaleDateString()),
+        labels: details.moistureMeasurements.map((d) => d.timestamp.toLocaleDateString()),
         datasets: [
             {
                 label: "Tageswert",
                 type: "line",
-                data: details.measurements.map((d) => d.moisture),
+                data: details.moistureMeasurements.map((d) => d.sensor),
                 borderColor: colors.green,
                 backgroundColor: colors.green,
                 yAxisID: "moisture",
@@ -83,7 +83,7 @@ function extractRecentDaysDataset(details: SensorDetails): ChartData<"bar" | "li
             {
                 label: "Globales Mittel",
                 type: "line",
-                data: details.peerMeasurements.map((d) => d.moisture),
+                data: details.moistureMeasurements.map((d) => d.peers),
                 borderColor: colors.grey,
                 backgroundColor: colors.grey,
                 yAxisID: "moisture",

@@ -1,5 +1,5 @@
 import useFetch from "use-http";
-import { MoistureMeasurement, SensorDetails, SensorInfo } from "../model/models";
+import { SensorDetails, SensorInfo } from "../model/models";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -18,17 +18,35 @@ function processData(sensorInfo: SensorInfo, data: SensorDetailsDto): SensorDeta
     function toDate(timestamp: string): Date {
         return new Date(/\+|Z/i.test(timestamp) ? timestamp : timestamp + "Z");
     }
-    function processMeasurement({ moisture, time }: { moisture: number; time: string }): MoistureMeasurement {
+    function processMeasurement({ moisture, time }: { moisture: number; time: string }): {
+        moisture: number;
+        timestamp: Date;
+    } {
         return { moisture, timestamp: toDate(time) };
     }
 
-    const measurements = data.sensor.map(processMeasurement);
+    const sensorMeasurements = data.sensor.map(processMeasurement);
     const peerMeasurements = data.peers.map(processMeasurement);
+    const allMeasurements = new Map<number, { timestamp: Date; sensor?: number; peers?: number }>();
+    sensorMeasurements.forEach(({ timestamp, moisture }) => {
+        allMeasurements.set(timestamp.getTime(), { timestamp, sensor: moisture });
+    });
+
+    peerMeasurements.forEach(({ timestamp, moisture }) => {
+        const existing = allMeasurements.get(timestamp.getTime());
+        if (existing) {
+            existing.peers = moisture;
+        } else {
+            allMeasurements.set(timestamp.getTime(), { timestamp, peers: moisture });
+        }
+    });
+
+    const moistureMeasurements = [...allMeasurements.values()];
+    moistureMeasurements.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime());
 
     return {
-        measurements,
-        peerMeasurements,
         info: sensorInfo,
+        moistureMeasurements,
     };
 }
 
