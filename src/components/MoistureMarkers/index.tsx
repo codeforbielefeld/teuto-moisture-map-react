@@ -49,10 +49,10 @@ const icon = (record: SensorInfo) =>
         className: "custom-pin",
         iconAnchor: [30, 83],
         popupAnchor: [-14, -83],
-        html: renderToString(<img src={getImageForMeasurment(record)} alt={"tag"}></img>),
+        html: renderToString(<img src={getImageForMeasurement(record)} alt={"tag"}></img>),
     });
 
-const getImageForMeasurment = (record: SensorInfo) => {
+const getImageForMeasurement = (record: SensorInfo) => {
     return record.soil_moisture < 10
         ? tree_dead
         : record.soil_moisture < 15
