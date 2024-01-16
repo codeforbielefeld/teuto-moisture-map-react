@@ -8,13 +8,14 @@ import {
     Tooltip,
     Legend,
     ChartData,
+    LineController,
 } from "chart.js";
 import { Chart } from "react-chartjs-2";
 import { SensorDetails, SensorInfo } from "../../model/models";
 import useSensorDetails from "../../hooks/useSensorDetails";
 
 // ChartJS setup
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Tooltip, Legend, LineController);
 
 const recentDaysChartOptions = {
     responsive: true,
