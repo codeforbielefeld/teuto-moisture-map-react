@@ -104,9 +104,10 @@ const SensorTooltip = ({ record }: { record: SensorInfo }) => {
                     <Dropdown
                         className={styles.dropdown}
                         options={[
-                            { key: "1d", text: "täglich" },
-                            { key: "1w", text: "wöchentlich" },
-                            { key: "4w", text: "monatlich" },
+                            { key: HistoryWindow.hourly, text: "stündlich" },
+                            { key: HistoryWindow.daily, text: "täglich" },
+                            { key: HistoryWindow.weekly, text: "wöchentlich" },
+                            { key: HistoryWindow.monthly, text: "monatlich" },
                         ]}
                         defaultSelectedKey={historyWindow}
                         onChange={(event, option) => {

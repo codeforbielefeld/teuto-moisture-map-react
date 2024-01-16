@@ -9,6 +9,7 @@ import { Info, Imprint } from "./components/Markdown";
 import { createContext, useEffect, useState } from "react";
 
 export enum HistoryWindow {
+    hourly = "1h",
     daily = "1d",
     weekly = "1w",
     monthly = "4w",

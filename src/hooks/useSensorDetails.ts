@@ -1,7 +1,7 @@
 import useFetch from "use-http";
 import { SensorDetails, SensorInfo } from "../model/models";
 import { useContext } from "react";
-import { HistoryWindowContext } from "../App";
+import { HistoryWindow, HistoryWindowContext } from "../App";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -58,9 +58,24 @@ interface SensorDetailsState {
     details: SensorDetails | undefined;
 }
 
+function numRecords(historyWindow: HistoryWindow): number {
+    switch (historyWindow) {
+        case HistoryWindow.hourly:
+            return 24;
+        case HistoryWindow.daily:
+            return 7;
+        case HistoryWindow.weekly:
+            return 8;
+        case HistoryWindow.monthly:
+            return 12;
+    }
+    return 7;
+}
+
 export default function useSensorDetails(sensorInfo: SensorInfo): SensorDetailsState {
     const { historyWindow } = useContext(HistoryWindowContext);
-    const url = `${BACKEND_URL}/sensorData/${sensorInfo.device}?records=7&resolution=${historyWindow}`;
+
+    const url = `${BACKEND_URL}/sensorData/${sensorInfo.device}?records=${numRecords(historyWindow)}&resolution=${historyWindow}`;
 
     const fetchResult = useFetch<SensorDetailsDto>(url, [sensorInfo]);
     const { loading, error, data: dto } = fetchResult;

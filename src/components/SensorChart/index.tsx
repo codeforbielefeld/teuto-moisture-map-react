@@ -14,6 +14,8 @@ import { Chart } from "react-chartjs-2";
 import { SensorDetails, SensorInfo } from "../../model/models";
 import useSensorDetails from "../../hooks/useSensorDetails";
 import { mergeStyleSets } from "@fluentui/react";
+import { useContext } from "react";
+import { HistoryWindow, HistoryWindowContext } from "../../App";
 
 // ChartJS setup
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Tooltip, Legend, LineController);
@@ -60,7 +62,10 @@ const recentDaysChartOptions = {
     },
 };
 
-function extractRecentDaysDataset(details: SensorDetails): ChartData<"bar" | "line", (number | undefined)[], string> {
+function extractRecentDaysDataset(
+    details: SensorDetails,
+    hourly: boolean,
+): ChartData<"bar" | "line", (number | undefined)[], string> {
     const colors = {
         red: "rgb(255, 99, 132)",
         orange: "rgb(255, 159, 64)",
@@ -71,7 +76,10 @@ function extractRecentDaysDataset(details: SensorDetails): ChartData<"bar" | "li
         grey: "rgb(201, 203, 207)",
     };
     return {
-        labels: details.moistureMeasurements.map((d) => d.timestamp.toLocaleDateString()),
+        labels: details.moistureMeasurements.map((d) => {
+            if (hourly) return d.timestamp.toLocaleTimeString();
+            else return d.timestamp.toLocaleDateString();
+        }),
         datasets: [
             {
                 label: "Tageswert",
@@ -101,8 +109,11 @@ const style = mergeStyleSets({
 });
 
 export default function SensorChart({ sensorInfo }: { sensorInfo: SensorInfo }) {
+    const { historyWindow } = useContext(HistoryWindowContext);
+    const hourly = historyWindow === HistoryWindow.hourly;
     const { details, loading } = useSensorDetails(sensorInfo);
-    if (details) return <Chart type="line" options={recentDaysChartOptions} data={extractRecentDaysDataset(details)} />;
+    if (details)
+        return <Chart type="line" options={recentDaysChartOptions} data={extractRecentDaysDataset(details, hourly)} />;
     else if (loading) return <div className={style.message}>lade Verlauf</div>;
     return <div className={style.message}>Fehler beim Laden :(</div>;
 }
