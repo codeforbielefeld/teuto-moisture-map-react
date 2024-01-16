@@ -3,7 +3,8 @@ import { MoistureData, MoistureDataDto } from "../model/models";
 import add from "date-fns/add";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const MOISTURE_DATA_URL = import.meta.env.VITE_MOISTURE_DATA_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const MOISTURE_DATA_URL = `${BACKEND_URL}/mapData`;
 
 const MOCK_DATA: MoistureDataDto = {
     timestamp: "1970-01-01 00:00:00",
@@ -83,7 +84,7 @@ export default function useMoistureData(): MoistureState {
         };
     }
 
-    const data = dto ? processData(dto) : undefined;
+    const data = !error && dto ? processData(dto) : undefined;
     validTo.current = data ? add(data.timestamp, { days: 1, minutes: 1 }) : add(new Date(), { minutes: 5 });
 
     return { loading, error, data };

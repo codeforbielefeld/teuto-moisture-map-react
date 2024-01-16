@@ -1,6 +1,6 @@
 interface ImportMetaEnv {
     readonly DEV: boolean;
-    readonly VITE_MOISTURE_DATA_URL: string;
+    readonly VITE_BACKEND_URL: string;
 }
 
 interface ImportMeta {

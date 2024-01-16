@@ -1,5 +1,6 @@
 import { FontWeights, getTheme, mergeStyleSets, Text } from "@fluentui/react";
 import { SensorInfo } from "../../model/models";
+import SensorChart from "../SensorChart";
 
 // Styles
 const theme = getTheme();
@@ -17,6 +18,9 @@ const styles = mergeStyleSets({
     inner: {
         height: "100%",
         padding: "0 18px 15px",
+    },
+    chart: {
+        minHeight: "200px",
     },
     subtext: [
         theme.fonts.small,
@@ -48,7 +52,7 @@ const SensorTooltip = ({ record }: { record: SensorInfo }) => {
                     <thead>
                         <tr>
                             <td></td>
-                            <td>tagesmittel</td>
+                            <td>Tagesmittel</td>
                             <td>letzte</td>
                         </tr>
                     </thead>
@@ -85,6 +89,9 @@ const SensorTooltip = ({ record }: { record: SensorInfo }) => {
                     <Text className={styles.subtext}>
                         Letzte Aktualisierung: {record.last_updated.toLocaleString()}
                     </Text>
+                </div>
+                <div className={styles.chart}>
+                    <SensorChart sensorInfo={record} />
                 </div>
             </div>
         </>

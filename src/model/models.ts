@@ -39,3 +39,14 @@ export interface MoistureData {
     records: SensorInfo[];
     timestamp: Date;
 }
+
+export interface MoistureMeasurement {
+    timestamp: Date;
+    moisture: number;
+}
+
+export interface SensorDetails {
+    info: SensorInfo;
+    measurements: MoistureMeasurement[];
+    peerMeasurements: MoistureMeasurement[];
+}

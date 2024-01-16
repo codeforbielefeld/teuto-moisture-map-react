@@ -2,7 +2,7 @@
 
 ## Available Scripts
 
-Before running/building the app either create a `.env` file or set the environment variable `VITE_MOISTURE_DATA_URL`.
+Before running/building the app either create a `.env` file or set the environment variable `VITE_BACKEND_URL`.
 
 In the project directory, you can run:
 
