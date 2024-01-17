@@ -1,7 +1,7 @@
-import useFetch from "use-http";
 import { SensorDetails, SensorInfo } from "../model/models";
 import { useContext } from "react";
 import { HistoryWindow, HistoryWindowContext } from "../App";
+import { useQuery } from "@tanstack/react-query";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -54,7 +54,7 @@ function processData(sensorInfo: SensorInfo, data: SensorDetailsDto): SensorDeta
 
 interface SensorDetailsState {
     loading: Boolean;
-    error: Error | undefined;
+    error: Boolean;
     details: SensorDetails | undefined;
 }
 
@@ -77,10 +77,14 @@ export default function useSensorDetails(sensorInfo: SensorInfo): SensorDetailsS
 
     const url = `${BACKEND_URL}/sensorData/${sensorInfo.device}?records=${numRecords(historyWindow)}&resolution=${historyWindow}`;
 
-    const fetchResult = useFetch<SensorDetailsDto>(url, [sensorInfo]);
-    const { loading, error, data: dto } = fetchResult;
+    const { data: dto, status } = useQuery({
+        queryKey: ["moisture-data", "sensor-details", sensorInfo.device, historyWindow],
+        queryFn: async () => fetch(url).then((r) => r.json().then((r) => r as SensorDetailsDto)),
+    });
 
-    const details = !error && dto ? processData(sensorInfo, dto) : undefined;
+    const loading = status === "pending";
+    const error = status === "error";
+    const details = status === "success" && dto ? processData(sensorInfo, dto) : undefined;
 
     return { loading, error, details };
 }

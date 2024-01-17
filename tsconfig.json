@@ -12,7 +12,7 @@
         "isolatedModules": true,
         /* Type Checking */
         "strict": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
     },
-    "include": ["src", "types"]
+    "include": ["src", "types"],
 }

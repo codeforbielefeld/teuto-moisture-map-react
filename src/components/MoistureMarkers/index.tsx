@@ -1,5 +1,6 @@
 import L from "leaflet";
 import * as React from "react";
+import { useState } from "react";
 import { Marker, Popup, useMap } from "react-leaflet";
 import { FontWeights, mergeStyleSets, Overlay } from "@fluentui/react";
 import "./index.css";
@@ -65,7 +66,7 @@ const getImageForMeasurement = (record: SensorInfo) => {
 const MoistureMarkers: React.FC = () => {
     const { loading, error, data } = useMoistureData();
     const map = useMap();
-    const [boundingBox, setBoundingBox] = React.useState<number[][]>([]);
+    const [boundingBox, setBoundingBox] = useState<number[][]>([]);
 
     if (loading)
         return (
@@ -95,18 +96,37 @@ const MoistureMarkers: React.FC = () => {
                 setBoundingBox(newBB);
             }
         }
-        return (
-            <>
-                {data?.records?.map((record: SensorInfo, idx) => (
-                    <Marker key={idx} icon={icon(record)} position={[record.latitude, record.longitude]}>
-                        <Popup className="request-popup">
-                            <SensorTooltip record={record} />
-                        </Popup>
-                    </Marker>
-                ))}
-            </>
-        );
+        return <>{data?.records?.map((record: SensorInfo, idx) => <MoistureMarker key={idx} record={record} />)}</>;
     }
 };
+
+function MoistureMarker({ record }: { record: SensorInfo }) {
+    const [open, setOpen] = useState(true);
+    const ref = React.useRef<number | undefined>();
+    return (
+        <Marker
+            icon={icon(record)}
+            position={[record.latitude, record.longitude]}
+            // Leaflet keeps the popup component mounted once the popup has been opened.
+            // This keeps the query used by the tooltip in use causing spurious fetches for closed popups.
+            // We manually keep track of the popup and unmount the children to avoid this.
+            // The timeout is used for smooth fadeout.
+            eventHandlers={{
+                popupopen: () => {
+                    if (ref.current) {
+                        window.clearTimeout(ref.current);
+                        ref.current = undefined;
+                    }
+                    setOpen(true);
+                },
+                popupclose: () => {
+                    ref.current = window.setTimeout(() => setOpen(false), 1000);
+                },
+            }}
+        >
+            <Popup className="request-popup">{open ? <SensorTooltip record={record} /> : null}</Popup>
+        </Marker>
+    );
+}
 
 export default MoistureMarkers;

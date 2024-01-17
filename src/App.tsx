@@ -7,6 +7,7 @@ import { useBoolean } from "@fluentui/react-hooks";
 import MoistureMarkers from "./components/MoistureMarkers";
 import { Info, Imprint } from "./components/Markdown";
 import { createContext, useEffect, useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export enum HistoryWindow {
     hourly = "1h",
@@ -18,6 +19,15 @@ export const HistoryWindowContext = createContext<{
     historyWindow: HistoryWindow;
     setHistoryWindow: React.Dispatch<React.SetStateAction<HistoryWindow>>;
 }>({ historyWindow: HistoryWindow.daily, setHistoryWindow: () => {} });
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            staleTime: 60 * 60 * 1000,
+            gcTime: 60 * 60 * 1000,
+        },
+    },
+});
 
 function App() {
     const position: [number, number] = [52.01, 8.542732];
@@ -37,20 +47,22 @@ function App() {
     });
 
     return (
-        <HistoryWindowContext.Provider value={{ historyWindow, setHistoryWindow }}>
-            <div className="App">
-                <SidePanel isOpen={infoOpen} dismissPanel={() => dismissInfo()} children={<Info />} />
-                <SidePanel isOpen={imprintOpen} dismissPanel={() => dismissImprint()} children={<Imprint />} />
-                <MapContainer zoomControl={false} center={position} zoom={zoom} style={{ height: height }}>
-                    <MoistureMarkers />
-                    <TileLayer
-                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <AppCommandBar openImprint={openImprint} openInfo={openInfo} />
-                </MapContainer>
-            </div>
-        </HistoryWindowContext.Provider>
+        <QueryClientProvider client={queryClient}>
+            <HistoryWindowContext.Provider value={{ historyWindow, setHistoryWindow }}>
+                <div className="App">
+                    <SidePanel isOpen={infoOpen} dismissPanel={() => dismissInfo()} children={<Info />} />
+                    <SidePanel isOpen={imprintOpen} dismissPanel={() => dismissImprint()} children={<Imprint />} />
+                    <MapContainer zoomControl={false} center={position} zoom={zoom} style={{ height: height }}>
+                        <MoistureMarkers />
+                        <TileLayer
+                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <AppCommandBar openImprint={openImprint} openInfo={openInfo} />
+                    </MapContainer>
+                </div>
+            </HistoryWindowContext.Provider>
+        </QueryClientProvider>
     );
 }
 
