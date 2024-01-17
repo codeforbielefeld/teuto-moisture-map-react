@@ -77,12 +77,12 @@ function extractRecentDaysDataset(
     };
     return {
         labels: details.moistureMeasurements.map((d) => {
-            if (hourly) return d.timestamp.toLocaleTimeString();
+            if (hourly) return d.timestamp.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
             else return d.timestamp.toLocaleDateString();
         }),
         datasets: [
             {
-                label: "Tageswert",
+                label: "Sensormittel",
                 type: "line",
                 data: details.moistureMeasurements.map((d) => d.sensor),
                 borderColor: colors.green,
