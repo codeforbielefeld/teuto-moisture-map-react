@@ -1,30 +1,26 @@
-# Teuto Moisture Map - React
+# Teuto Moisture Map - Frontend
 
 ## Available Scripts
 
-Before running/building the app either create a `.env` file or set the environment variable `REACT_APP_MOISTURE_DATA_URL`.
+Before running/building the app either create a `.env` file or set the environment variable `VITE_BACKEND_URL`.
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm run start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Should automatically open [http://localhost:5173](http://localhost:5173) in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The page will reload if you make edits.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production to the `dist` folder using the `.env.production` configuration\
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `npm run serve`
+
+Builds the app (using the .env.production configuration) and serves the bundle.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

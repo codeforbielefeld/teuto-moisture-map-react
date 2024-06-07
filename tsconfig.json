@@ -1,20 +1,18 @@
 {
     "compilerOptions": {
-        "target": "es5",
-        "lib": ["dom", "dom.iterable", "esnext"],
-        "allowJs": true,
-        "skipLibCheck": true,
+        /* Visit https://aka.ms/tsconfig to read more about this file */
+        /* Language and Environment */
+        "target": "ES2022",
+        "jsx": "react-jsx",
+        /* Modules */
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
         "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "strict": true,
         "forceConsistentCasingInFileNames": true,
-        "noFallthroughCasesInSwitch": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
         "isolatedModules": true,
-        "noEmit": true,
-        "jsx": "react-jsx"
+        /* Type Checking */
+        "strict": true,
+        "skipLibCheck": true,
     },
-    "include": ["src"]
+    "include": ["src", "types"],
 }

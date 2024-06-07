@@ -1,5 +1,8 @@
-import { FontWeights, getTheme, mergeStyleSets, Text } from "@fluentui/react";
+import { Dropdown, FontWeights, getTheme, Label, mergeStyleSets, Text } from "@fluentui/react";
 import { SensorInfo } from "../../model/models";
+import SensorChart from "../SensorChart";
+import { useContext } from "react";
+import { HistoryWindow, HistoryWindowContext } from "../../App";
 
 // Styles
 const theme = getTheme();
@@ -17,6 +20,20 @@ const styles = mergeStyleSets({
     inner: {
         height: "100%",
         padding: "0 18px 15px",
+    },
+    history: {
+        marginTop: "1em",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+    },
+    dropdown: {
+        minWidth: "11em",
+    },
+    chart: {
+        minHeight: "200px",
+        display: "flex",
+        alignItems: "center",
     },
     subtext: [
         theme.fonts.small,
@@ -41,6 +58,7 @@ const styles = mergeStyleSets({
 
 const SensorTooltip = ({ record }: { record: SensorInfo }) => {
     const format = (n: number) => new Intl.NumberFormat("de-DE", { maximumFractionDigits: 2 }).format(Number(n));
+    const { historyWindow, setHistoryWindow } = useContext(HistoryWindowContext);
     return (
         <>
             <div className={styles.inner}>
@@ -48,7 +66,7 @@ const SensorTooltip = ({ record }: { record: SensorInfo }) => {
                     <thead>
                         <tr>
                             <td></td>
-                            <td>tagesmittel</td>
+                            <td>Tagesmittel</td>
                             <td>letzte</td>
                         </tr>
                     </thead>
@@ -81,6 +99,27 @@ const SensorTooltip = ({ record }: { record: SensorInfo }) => {
                         )}
                     </tbody>
                 </table>
+                <div className={styles.history}>
+                    <Label>Verlauf</Label>
+                    <Dropdown
+                        className={styles.dropdown}
+                        options={[
+                            { key: HistoryWindow.hourly, text: "stündlich" },
+                            { key: HistoryWindow.daily, text: "täglich" },
+                            { key: HistoryWindow.weekly, text: "wöchentlich" },
+                            { key: HistoryWindow.monthly, text: "monatlich" },
+                        ]}
+                        defaultSelectedKey={historyWindow}
+                        onChange={(event, option) => {
+                            if (Object.values(HistoryWindow).includes(option?.key as any)) {
+                                setHistoryWindow(option?.key as any);
+                            }
+                        }}
+                    />
+                </div>
+                <div className={styles.chart}>
+                    <SensorChart sensorInfo={record} />
+                </div>
                 <div className={styles.footer}>
                     <Text className={styles.subtext}>
                         Letzte Aktualisierung: {record.last_updated.toLocaleString()}

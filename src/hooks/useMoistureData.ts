@@ -1,9 +1,8 @@
-import useFetch from "use-http";
 import { MoistureData, MoistureDataDto } from "../model/models";
-import add from "date-fns/add";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
-const MOISTURE_DATA_URL = process.env.REACT_APP_MOISTURE_DATA_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const MOISTURE_DATA_URL = `${BACKEND_URL}/mapData`;
 
 const MOCK_DATA: MoistureDataDto = {
     timestamp: "1970-01-01 00:00:00",
@@ -36,55 +35,28 @@ function processData(data: MoistureDataDto): MoistureData {
 
 interface MoistureState {
     loading: Boolean;
-    error: Error | undefined;
+    error: Boolean;
     data: MoistureData | undefined;
 }
 
 export default function useMoistureData(): MoistureState {
-    const [signal, setSignal] = useState(true);
-    const {
-        loading,
-        error,
-        data: dto,
-        cache,
-    } = useFetch<MoistureDataDto>(MOISTURE_DATA_URL, { cache: "reload" }, [signal]);
-    const reload = useCallback(() => {
-        cache.clear();
-        setSignal(!signal);
-    }, [cache, signal]);
+    const { data: dto, status } = useQuery({
+        queryKey: ["moisture-data"],
+        queryFn: async () => fetch(MOISTURE_DATA_URL).then((r) => r.json().then((r) => r as MoistureDataDto)),
+    });
 
-    const validTo = useRef(add(new Date(), { minutes: 5 }));
+    const loading = status === "pending";
+    const error = status === "error";
 
-    useEffect(() => {
-        const checkValid = () => {
-            if (validTo.current < new Date()) {
-                reload();
-            }
-        };
-        const checkLive = () => {
-            const r = window.setInterval(checkValid, 5 * 60 * 1000);
-            window.addEventListener("blur", () => window.clearInterval(r), {
-                once: true,
-            });
-        };
-        window.addEventListener("focus", checkValid);
-        window.addEventListener("focus", checkLive);
-        return () => {
-            window.removeEventListener("focus", checkValid);
-            window.removeEventListener("focus", checkLive);
-        };
-    }, [reload]);
-
-    if (!dto && process.env.NODE_ENV === "development") {
+    if (!dto && import.meta.env.DEV) {
         return {
             loading: false,
-            error: undefined,
+            error: false,
             data: processData(MOCK_DATA),
         };
     }
 
-    const data = dto ? processData(dto) : undefined;
-    validTo.current = data ? add(data.timestamp, { days: 1, minutes: 1 }) : add(new Date(), { minutes: 5 });
+    const data = status === "success" && dto ? processData(dto) : undefined;
 
     return { loading, error, data };
 }

@@ -1,7 +1,0 @@
-# Impressum
-
-XXXX
-
-# Datenschutzhinweise
-
-XXXX
