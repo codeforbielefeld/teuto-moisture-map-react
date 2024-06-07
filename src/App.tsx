@@ -6,11 +6,11 @@ import SidePanel from "./components/SidePanel";
 import { useBoolean } from "@fluentui/react-hooks";
 import MoistureMarkers from "./components/MoistureMarkers";
 import { Info, Imprint } from "./components/Markdown";
-import React,{ createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Markdown from "./components/Markdown";
 import ControlOverlayUI from "./components/Overlay/ControlOverlay/ControlOverlayUI";
 import LayerOverlay from "./components/Overlay";
+import { LeafletEvent } from "leaflet";
 
 export enum HistoryWindow {
     hourly = "1h",
@@ -38,7 +38,7 @@ const queryClient = new QueryClient({
  */
 
 function MapHack({ setMap }: { setMap: any }): null {
-    const map = useMap();
+    const map = setMap();
     useEffect(() => {
         setMap(map);
     });
@@ -48,7 +48,7 @@ function MapHack({ setMap }: { setMap: any }): null {
 function App() {
     const [height, setHeight] = React.useState(window.innerHeight);
     const position: [number, number] = [52.01, 8.542732];
-    const [map, setMap] = React.useState<LeafletMap>();
+    const [map, setMap] = React.useState<LeafletEvent>();
     const zoom = 13;
 
     const [historyWindow, setHistoryWindow] = useState(HistoryWindow.daily);
@@ -59,7 +59,6 @@ function App() {
     const [showLayer, setShowLayer] = useState<number>(0);
 
     // We manually update the height of the map to the window.innerHeight to avoid problems with mobile views
-    const [height, setHeight] = useState(window.innerHeight);
     useEffect(() => {
         const cb = () => setHeight(window.innerHeight);
         window.addEventListener("resize", cb);
@@ -84,11 +83,7 @@ function App() {
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
                         <LayerOverlay showLayer={showLayer} setShowLayer={setShowLayer} />
-                        <AppCommandBar zoomIn={() => map?.zoomIn()}
-                                       zoomOut={() => map?.zoomOut()}
-                                       openImprint={openImprint}
-                                       openInfo={openInfo}
-                                       openOverlay={openOverlay}/>
+                        <AppCommandBar openImprint={openImprint} openInfo={openInfo} openOverlay={openOverlay} />
                     </MapContainer>
                 </div>
             </HistoryWindowContext.Provider>
