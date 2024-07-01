@@ -79,7 +79,11 @@ export default function useSensorDetails(sensorInfo: SensorInfo): SensorDetailsS
 
     const { data: dto, status } = useQuery({
         queryKey: ["moisture-data", "sensor-details", sensorInfo.device, historyWindow],
-        queryFn: async () => fetch(url).then((r) => r.json().then((r) => r as SensorDetailsDto)),
+        queryFn: async () =>
+            fetch(url).then((r) => {
+                if (!r.ok) throw new Error(`Failed to fetch sensor details. Status code: ${r.status}`);
+                return r.json().then((r) => r as SensorDetailsDto);
+            }),
     });
 
     const loading = status === "pending";
