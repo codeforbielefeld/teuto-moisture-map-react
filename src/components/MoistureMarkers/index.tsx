@@ -124,7 +124,9 @@ function MoistureMarker({ record }: { record: SensorInfo }) {
                 },
             }}
         >
-            <Popup className="request-popup">{open ? <SensorTooltip record={record} /> : null}</Popup>
+            <Popup className="request-popup" maxWidth={600}>
+                {open ? <SensorTooltip record={record} /> : null}
+            </Popup>
         </Marker>
     );
 }
