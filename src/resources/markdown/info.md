@@ -150,6 +150,10 @@ Auch wenn der Sensor immer in der Nähe von Bäumen aufgestellt werden soll, sin
 
 Aber die Daten sind eine gute Grundlage, um zu lernen, mit den Informationen den Zustand des Waldes zu beschreiben und z.B. auch Stadt-/Bestandsbäume besser zu gießen.
 
+## Zugang zu den Daten
+
+Auf Zenodo stellen wir die gesammelten Daten als zitierfähiges Open Data-Set zur Verfügung. Aktuell findet ihr die Daten August 2023 bis September 2024 in dem Datenexport: _Code for Bielefeld e.V. (2024). Soil moisture in Teutoburg forest/Bielefeld dataset (Version v1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.13857062_
+
 ## Möglichkeiten von Workshops
 
 Rund um unser Projekt sind unterschiedliche Workshops möglich, um mit Schüler:innen verschiedene Themen zu Technologien und Umweltschutz zu bearbeiten.
@@ -161,6 +165,8 @@ Zum Beispiel hat Code for Bielefeld e.V. gemeinsam mit ExperiMINT e.V. und der W
 - ...an Tag 3 einen Dragino LSE01 Bodenfeuchte-Sensor gemeinsam vergraben und uns mit der Funktionsweise von LoRaWAN und The Things Network auseinandergesetzt.
 
 Zusätzlich haben an allen drei Tagen Vereinsmitglieder von Code for Bielefeld in Interview-Sessions den Schüler:innen Einblicke in ihre unterschiedlichen beruflichen (Ausbildungs-)Wege in die IT vorgestellt. Dabei gab es einen Überblick über die Vielfalt an Berufen und Aufgaben im Technologie-Bereich. Das war für die Teilnehmer:innen sehr wertvoll hinsichtlich ihrer eigenen Berufsorientierung.
+
+Ein Video über unseren Workshop findet ihr auf [YouTube](https://youtu.be/797Fj7fejmA?si=fC8NQicZzgnCFc4X). Matthias Cremer von der filmanufaktur in Halle/Westf. hat uns damals begleitet. Vielen Dank!
 
 Das Material zu dem Wokshop teilen wir gerne auf Anfrage. Gerne unterstützen wir auch bei weiteren Workshop-Formaten. Schickt uns eure Vorschläge und Ideen unter teuto.bodensensor@gmail.com zu. Wir würden z.B. sehr gerne einmal mit Schüler:innen eine Exkursion mitten hinein in den Teutoburger Wald machen!
 
