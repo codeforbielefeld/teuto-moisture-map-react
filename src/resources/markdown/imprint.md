@@ -2,15 +2,14 @@
 
 ## Impressum - Anbieterkennzeichnung (§ 5 TMG)
 
-Code for Bielefeld e.V. ℅ codecentric AG \
-Dr. Meike Wocken \
-Obernstr. 2 \
-33602 Bielefeld \
-E-Mail: teuto.bodensensor@gmail.com \
-Tel.: +49 151 7444 4894
+Code for Bielefeld e.V. \
+z.Hd. Helen Bielawa \
+Koblenzer Straße 72a  \
+33613 Bielefeld \
+E-Mail: bielefeld@codefor.de \
+Tel.: +49 1577 7576 508
 
 Vereinsregister: Vereinsregister des Amtsgerichts Bielefeld, VR4790
-
 Der Verein Code for Bielefeld e.V. betreibt die Webseite www.bodenfeuchte.org mit dazugehörigen Unterseiten.
 
 ## Disclaimer
