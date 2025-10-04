@@ -152,7 +152,7 @@ Aber die Daten sind eine gute Grundlage, um zu lernen, mit den Informationen den
 
 ## Zugang zu den Daten
 
-Auf Zenodo stellen wir die gesammelten Daten als zitierfähiges Open Data-Set zur Verfügung. Aktuell findet ihr die Daten August 2023 bis September 2024 in dem Datenexport: _Code for Bielefeld e.V. (2024). Soil moisture in Teutoburg forest/Bielefeld dataset (Version v1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.13857062_
+Auf Zenodo stellen wir die gesammelten Daten als zitierfähiges Open Data-Set zur Verfügung. Aktuell findet ihr die Daten August 2023 bis September 2024 in dem Datenexport: _Code for Bielefeld e.V. (2024). Soil moisture in Teutoburg forest/Bielefeld dataset (Version v1) [Data set]. Zenodo. [https://doi.org/10.5281/zenodo.13857062_](https://doi.org/10.5281/zenodo.13857062_)
 
 ## Möglichkeiten von Workshops
 
